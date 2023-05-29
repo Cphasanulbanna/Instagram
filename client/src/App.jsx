@@ -1,5 +1,6 @@
 import React from "react";
+import AuthWrapper from "./components/auth/AuthWrapper";
 
 export const App = () => {
-    return <div className="bg-[yellow]">App</div>;
+    return <AuthWrapper />;
 };

@@ -2,6 +2,7 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
+        darkMode: "class",
         screens: {
             xxl: { max: "1450px" },
             xl: { max: "1400px" },

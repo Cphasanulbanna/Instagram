@@ -3,10 +3,11 @@ import React from "react";
 //icons
 import googlePlay from "../../assets/icons/google-play.png";
 import microsoft from "../../assets/icons/microsoft.png";
-import instagram from "../../assets/icons/instagram.png";
+import { Login } from "./Login";
 
 const AuthWrapper = () => {
     const flex = "flex justify-center";
+    const grey = "text-[var(--text-grey)]";
 
     const links = [
         { id: 1, link: "Meta", path: "/" },
@@ -29,6 +30,7 @@ const AuthWrapper = () => {
                 <div
                     className={`icons-box ${flex} flex-col items-center gap-[10px] px-[30px] py-[10px]`}
                 >
+                    <Login />
                     <h5 className="text-[14px]">Get the app</h5>
                     <div className={`${flex} gap-[10px] items-center`}>
                         <div className="cursor-pointer h-[40px]">
@@ -48,7 +50,7 @@ const AuthWrapper = () => {
                 <div className={`buttons flex-wrap items-center gap-[15px] ${flex}`}>
                     {links?.map((link) => (
                         <span
-                            className="text-[12px] text-[var(--text-grey)]"
+                            className={`text-[12px] ${grey}`}
                             key={link.id}
                         >
                             {link.link}
@@ -56,10 +58,8 @@ const AuthWrapper = () => {
                     ))}
                 </div>
                 <div className={`bottom ${flex} gap-[15px]`}>
-                    <div className="text-[var(--text-grey)] text-[12px]">English (UK)^</div>
-                    <p className="text-[var(--text-grey)] text-[12px]">
-                        c 2023 Instagram from Meta
-                    </p>
+                    <div className={`${grey} text-[12px]`}>English (UK)^</div>
+                    <p className={`${grey} text-[12px]`}>c 2023 Instagram from Meta</p>
                 </div>
             </section>
         </section>

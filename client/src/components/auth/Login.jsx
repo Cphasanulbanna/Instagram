@@ -95,7 +95,7 @@ export const Login = () => {
                         css={"mt-[7px]"}
                     />
                 </form>
-                <div className={`${flexPrimary} my-[15px]`}>
+                <div className={`${flexPrimary} my-[15px] w-[100%]`}>
                     <div className={greyLine}></div>
                     <h5 className="text-text-grey text-[13px] mx-[10px]">OR</h5>
                     <div className={greyLine}></div>
@@ -114,7 +114,10 @@ export const Login = () => {
                 </span>
             </div>
             <div>
-                <h4 className={`${greyBorder} text-[13px] text-[#000]  px-[40px] py-[25px] `}>
+                <h4
+                    className={`${greyBorder} text-[13px] text-[#000]  px-[40px] py-[25px] text-center
+                 `}
+                >
                     Don't have an account?{" "}
                     <Link
                         to={"/accounts/signup"}

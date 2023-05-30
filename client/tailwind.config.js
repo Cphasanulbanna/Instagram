@@ -24,6 +24,7 @@ export default {
                 "sky-blue": "rgb(0, 149, 246)",
                 "sky-blue-2": "#0095f6",
                 "blue-text": "#385185",
+                "blue-text-2": " #776b99",
                 "text-black": "#000",
                 "light-grey": "#dbdbdb",
                 "text-grey": "#737373",

@@ -73,11 +73,11 @@ export const Signup = () => {
 
     const flexPrimary = "flex items-center";
     const flex = "flex flex-col justify-center";
-    const greyLine = "h-[1px] flex flex-grow-[1] bg-light-grey";
+    const greyLine = "h-[1.5px] flex flex-grow-[1] bg-light-grey";
     const greyBorder = "border-[1px] border-solid border-light-grey";
     return (
         <div className={`${flex} gap-[15px] max-w-[350px] w-full`}>
-            <div className={`${flex} p-[40px] pb-[0px] items-center ${greyBorder} `}>
+            <div className={`${flex} p-[40px] items-center ${greyBorder} `}>
                 <div
                     className="logo h-[55px] w-[170px] cursor-pointer mb-[20px]"
                     style={{ backgroundImage: `url(${instagram})`, backgroundPositionY: "134px" }}
@@ -95,6 +95,11 @@ export const Signup = () => {
                         />
                     </div>
                     <span className="text-[14px]">Log in with Facebook</span>
+                </div>
+                <div className={`${flexPrimary} mb-[15px] w-[100%]`}>
+                    <div className={greyLine}></div>
+                    <h5 className="text-text-grey text-[13px] mx-[10px]">OR</h5>
+                    <div className={greyLine}></div>
                 </div>
                 <form
                     onSubmit={signup}
@@ -129,30 +134,26 @@ export const Signup = () => {
                         handleDataChange={handleDataChange}
                         type={"text"}
                     />
+                    <p className="text-[12px] text-text-grey text-center ">
+                        People who use our service may have uploaded your contact information to
+                        Instagram.{" "}
+                        <span className="cursor-pointer text-blue-text-2">Learn more</span>
+                    </p>
+                    <p className="text-[12px] text-text-grey text-center">
+                        By signing up, you agree to our Terms,{" "}
+                        <span className="cursor-pointer text-blue-text-2">Privacy Policy</span> and
+                        <span className="cursor-pointer text-blue-text-2"> Cookies Policy</span>.
+                    </p>
                     <PrimaryButton
                         title={"Sign Up"}
-                        css={"mt-[7px]"}
+                        css={"mt-[-8px]"}
                     />
                 </form>
-                <div className={`${flexPrimary} my-[15px]`}>
-                    <div className={greyLine}></div>
-                    <h5 className="text-text-grey text-[13px] mx-[10px]">OR</h5>
-                    <div className={greyLine}></div>
-                </div>
-                <div className={`${flexPrimary} gap-[10px]`}>
-                    <div className="w-[16px] h-[16px]">
-                        <img
-                            src={facebook}
-                            alt="facebook"
-                        />
-                    </div>
-                </div>
-                <span className="text-text-grey text-[12px] my-[20px]">
-                    Forgotten your password
-                </span>
             </div>
             <div>
-                <h4 className={`${greyBorder} text-[13px] text-[#000]  px-[40px] py-[25px] `}>
+                <h4
+                    className={`${greyBorder} text-[13px] text-[#000] text-center px-[40px] py-[25px] `}
+                >
                     Don't have an account?{" "}
                     <Link
                         to={"/accounts/login"}

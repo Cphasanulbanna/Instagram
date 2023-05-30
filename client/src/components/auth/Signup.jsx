@@ -5,6 +5,7 @@ import instagram from "../../assets/icons/auth/instagram.png";
 import { Input } from "../reusable-components/Input";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";
 import facebook from "../../assets/icons/auth/facebook.png";
+import facebookWhite from "../../assets/icons/auth/facebook-white.png";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 
@@ -78,9 +79,23 @@ export const Signup = () => {
         <div className={`${flex} gap-[15px] max-w-[350px] w-full`}>
             <div className={`${flex} p-[40px] pb-[0px] items-center ${greyBorder} `}>
                 <div
-                    className="logo h-[55px] w-[170px] cursor-pointer mb-[40px]"
+                    className="logo h-[55px] w-[170px] cursor-pointer mb-[20px]"
                     style={{ backgroundImage: `url(${instagram})`, backgroundPositionY: "134px" }}
                 ></div>
+                <h1 className="text-[16px] text-text-grey font-medium text-center mb-[15px]">
+                    Sign up to see photos and videos from your friends.
+                </h1>
+                <div
+                    className={`w-full text-[14px] text-blue-text ${flexPrimary} gap-[15px] bg-sky-blue-2 text-text-white py-[7px] px-[16px] rounded-[6px] mb-[20px] cursor-pointer justify-center`}
+                >
+                    <div className="bg-[#fff] w-[16px] h-[16px]">
+                        <img
+                            src={facebookWhite}
+                            alt="facebook"
+                        />
+                    </div>
+                    <span className="text-[14px]">Log in with Facebook</span>
+                </div>
                 <form
                     onSubmit={signup}
                     className={`input-container w-full ${flex} gap-[20px]`}
@@ -131,7 +146,6 @@ export const Signup = () => {
                             alt="facebook"
                         />
                     </div>
-                    <span className="text-[14px] text-blue-text">Log in with Facebook</span>
                 </div>
                 <span className="text-text-grey text-[12px] my-[20px]">
                     Forgotten your password

@@ -72,7 +72,7 @@ export const Login = () => {
                 ></div>
                 <form
                     onSubmit={login}
-                    className={`input-container w-full ${flex} gap-[8px]`}
+                    className={`input-container w-full ${flex} gap-[20px]`}
                 >
                     <Input
                         formData={formData}
@@ -81,6 +81,7 @@ export const Login = () => {
                         handleDataChange={handleDataChange}
                         type={"text"}
                     />
+
                     <Input
                         formData={formData}
                         name="password"

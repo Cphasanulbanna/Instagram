@@ -6,6 +6,7 @@ import microsoft from "../../assets/icons/auth/microsoft.png";
 import { Login } from "./Login";
 
 import { Routes, Route } from "react-router-dom";
+import { Signup } from "./Signup";
 
 const AuthWrapper = () => {
     const flex = "flex justify-center";
@@ -37,6 +38,10 @@ const AuthWrapper = () => {
                         <Route
                             path="/login"
                             element={<Login />}
+                        />
+                        <Route
+                            path="/signup"
+                            element={<Signup />}
                         />
                     </Routes>
 

@@ -2,17 +2,21 @@ import React, { useState } from "react";
 
 //icons
 import instagram from "../../assets/icons/auth/instagram.png";
-import facebook from "../../assets/icons/auth/facebook.png";
 import { Input } from "../reusable-components/Input";
-import * as yup from "yup";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";
+import facebook from "../../assets/icons/auth/facebook.png";
 import { Link } from "react-router-dom";
+import * as yup from "yup";
 
-export const Login = () => {
+export const Signup = () => {
     const [formData, setFormData] = useState({
         email: "",
+        fullname: "",
+        username: "",
         password: "",
     });
+
+    console.log(formData);
 
     const [errors, setErrors] = useState({});
 
@@ -22,8 +26,16 @@ export const Login = () => {
         setErrors({ ...errors, [name]: "" });
     };
 
+    const emailREGEX =
+        /^[a-z0-9]+([._]?[a-z0-9]+)*@[a-z0-9]+([.-]?[a-z0-9]+)*.(com|in|io|org|net|info|gov)$/;
+
     const formSchema = yup.object().shape({
-        email: yup.string().email("Invalid email").required("This field is required"),
+        email: yup
+            .string()
+            .test((value) => emailREGEX.test(value))
+            .required("This field is required"),
+        username: yup.string().required("This field is required"),
+        fullname: yup.string().required("This field is required"),
         password: yup
             .string()
             .test(
@@ -40,12 +52,13 @@ export const Login = () => {
             .required("This field is required"),
     });
 
-    const login = async (e) => {
+    const signup = async (e) => {
         e.preventDefault();
         await formSchema
             .validate(formData, { abortEarly: false })
             .then(() => {
                 console.log("success");
+                alert("success");
             })
             .catch((error) => {
                 console.log(error);
@@ -57,13 +70,10 @@ export const Login = () => {
             });
     };
 
-    console.log(formData);
-
     const flexPrimary = "flex items-center";
     const flex = "flex flex-col justify-center";
     const greyLine = "h-[1px] flex flex-grow-[1] bg-light-grey";
     const greyBorder = "border-[1px] border-solid border-light-grey";
-
     return (
         <div className={`${flex} gap-[15px] max-w-[350px] w-full`}>
             <div className={`${flex} p-[40px] pb-[0px] items-center ${greyBorder} `}>
@@ -72,7 +82,7 @@ export const Login = () => {
                     style={{ backgroundImage: `url(${instagram})`, backgroundPositionY: "134px" }}
                 ></div>
                 <form
-                    onSubmit={login}
+                    onSubmit={signup}
                     className={`input-container w-full ${flex} gap-[20px]`}
                 >
                     <Input
@@ -81,6 +91,20 @@ export const Login = () => {
                         errors={errors.email}
                         handleDataChange={handleDataChange}
                         type={"text"}
+                    />
+                    <Input
+                        name="FullName"
+                        type={"text"}
+                        handleDataChange={handleDataChange}
+                        formData={formData}
+                        errors={errors.fullname}
+                    />
+                    <Input
+                        name="Username"
+                        type={"text"}
+                        handleDataChange={handleDataChange}
+                        formData={formData}
+                        errors={errors.username}
                     />
 
                     <Input
@@ -91,7 +115,7 @@ export const Login = () => {
                         type={"text"}
                     />
                     <PrimaryButton
-                        title={"Log In"}
+                        title={"Sign Up"}
                         css={"mt-[7px]"}
                     />
                 </form>
@@ -117,10 +141,10 @@ export const Login = () => {
                 <h4 className={`${greyBorder} text-[13px] text-[#000]  px-[40px] py-[25px] `}>
                     Don't have an account?{" "}
                     <Link
-                        to={"/accounts/signup"}
+                        to={"/accounts/login"}
                         className="text-sky-blue font-medium cursor-pointer text-[14px]"
                     >
-                        Sign up
+                        Log In
                     </Link>
                 </h4>
             </div>

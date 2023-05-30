@@ -13,7 +13,9 @@ export const Input = ({ formData, handleDataChange, type, name, errors }) => {
                 onChange={handleDataChange}
                 placeholder={name.split(/(?=[A-Z])/).join(" ")}
             />
-            <span className="absolute left-0 bottom-[-20px] text-[10px] text-[red]">{errors}</span>
+            <span className="absolute left-0 bottom-[-20px] text-[10px] text-[red   ]">
+                {errors}
+            </span>
         </div>
     );
 };

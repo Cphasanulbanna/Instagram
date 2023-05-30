@@ -5,6 +5,8 @@ import googlePlay from "../../assets/icons/auth/google-play.png";
 import microsoft from "../../assets/icons/auth/microsoft.png";
 import { Login } from "./Login";
 
+import { Routes, Route } from "react-router-dom";
+
 const AuthWrapper = () => {
     const flex = "flex justify-center";
     const grey = "text-[var(--text-grey)]";
@@ -24,13 +26,19 @@ const AuthWrapper = () => {
         { id: 12, link: "Contact uploading and non-users", path: "/" },
         { id: 13, link: "Meta Verified", path: "/" },
     ];
+
     return (
         <section className="min-h-[100vh]">
             <section className={`w-[70%] mx-auto flex-col ${flex}  `}>
                 <div
                     className={`icons-box ${flex} flex-col items-center gap-[10px] px-[30px] py-[10px]`}
                 >
-                    <Login />
+                    <Routes>
+                        <Route
+                            path="/login"
+                            element={<Login />}
+                        />
+                    </Routes>
 
                     <h5 className="text-[14px]">Get the app</h5>
                     <div className={`${flex} gap-[10px] items-center`}>

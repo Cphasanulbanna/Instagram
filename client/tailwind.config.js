@@ -19,7 +19,16 @@ export default {
             sm1: { max: "360px" },
         },
         colors: {},
-        extend: {},
+        extend: {
+            colors: {
+                "sky-blue": "rgb(0, 149, 246)",
+                "blue-text": "#385185",
+                "text-black": "#000",
+                "light-grey": "#dbdbdb",
+                "text-grey": "#737373",
+                "text-white": "#fff",
+            },
+        },
     },
     plugins: [],
 };

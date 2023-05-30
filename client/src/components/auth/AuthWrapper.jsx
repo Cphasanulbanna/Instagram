@@ -1,8 +1,8 @@
 import React from "react";
 
 //icons
-import googlePlay from "../../assets/icons/google-play.png";
-import microsoft from "../../assets/icons/microsoft.png";
+import googlePlay from "../../assets/icons/auth/google-play.png";
+import microsoft from "../../assets/icons/auth/microsoft.png";
 import { Login } from "./Login";
 
 const AuthWrapper = () => {
@@ -25,12 +25,13 @@ const AuthWrapper = () => {
         { id: 13, link: "Meta Verified", path: "/" },
     ];
     return (
-        <section className="h-[100vh]">
-            <section className={`w-[70%] mx-auto flex-col ${flex} `}>
+        <section className="min-h-[100vh]">
+            <section className={`w-[70%] mx-auto flex-col ${flex}  `}>
                 <div
                     className={`icons-box ${flex} flex-col items-center gap-[10px] px-[30px] py-[10px]`}
                 >
                     <Login />
+
                     <h5 className="text-[14px]">Get the app</h5>
                     <div className={`${flex} gap-[10px] items-center`}>
                         <div className="cursor-pointer h-[40px]">
@@ -47,7 +48,7 @@ const AuthWrapper = () => {
                         </div>
                     </div>
                 </div>
-                <div className={`buttons flex-wrap items-center gap-[15px] ${flex}`}>
+                <div className={`buttons flex-wrap items-center gap-[20px] mt-[100px] ${flex}`}>
                     {links?.map((link) => (
                         <span
                             className={`text-[12px] ${grey}`}
@@ -57,7 +58,7 @@ const AuthWrapper = () => {
                         </span>
                     ))}
                 </div>
-                <div className={`bottom ${flex} gap-[15px]`}>
+                <div className={`bottom ${flex} gap-[15px] mt-[20px]`}>
                     <div className={`${grey} text-[12px]`}>English (UK)^</div>
                     <p className={`${grey} text-[12px]`}>c 2023 Instagram from Meta</p>
                 </div>

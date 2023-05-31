@@ -1,0 +1,47 @@
+import React from "react";
+import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
+import { ReactComponent as Home } from "../assets/icons/menu/home.svg";
+import { ReactComponent as Search } from "../assets/icons/auth/search.svg";
+import { ReactComponent as Explore } from "../assets/icons/menu/explore.svg";
+import { ReactComponent as Reel } from "../assets/icons/menu/reel.svg";
+import { ReactComponent as Message } from "../assets/icons/menu/message.svg";
+import { ReactComponent as Heart } from "../assets/icons/menu/heart.svg";
+import { ReactComponent as Add } from "../assets/icons/menu/add.svg";
+import { ReactComponent as Hamburger } from "../assets/icons/menu/hamburger.svg";
+
+export const Menu = () => {
+    const tabs = [
+        { id: 1, name: "Home", icon: Home },
+        { id: 2, name: "Search", icon: Search },
+        { id: 3, name: "Explore", icon: Explore },
+        { id: 4, name: "Reels", icon: Reel },
+        { id: 5, name: "Messages", icon: Message },
+        { id: 6, name: "Notifications", icon: Heart },
+        { id: 7, name: "Create", icon: Add },
+    ];
+    const flex = "flex items-center justify-between";
+    return (
+        <div
+            className={`w-[100%] max-w-[355px] ${flex} py-[30px] px-[20px] relative border-r-[1px] border-solid border-text-grey`}
+        >
+            <div className="mb-[50px]">
+                <Instagram className="w-[170px] cursor-pointer" />
+            </div>
+            <div className={`flex flex-col gap-[20px]`}>
+                {tabs.map((item) => (
+                    <div
+                        key={item.id}
+                        className={`${flex} gap-[15px] cursor-pointer`}
+                    >
+                        <div className="w-[24px]">{item.icon}</div>
+                        <h3>{item.name}</h3>
+                    </div>
+                ))}
+            </div>
+            <div className="fixed bottom-[20px] w-[100%] left-[20px] flex items-center gap-[15px] cursor-pointer">
+                <Hamburger />
+                <h3>More</h3>
+            </div>
+        </div>
+    );
+};

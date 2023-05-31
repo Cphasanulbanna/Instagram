@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
 //icons
-import instagram from "../../assets/icons/auth/instagram.png";
+import { ReactComponent as Instagram } from "../../assets/icons/auth/insta.svg";
 import { Input } from "../reusable-components/Input";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";
-import facebook from "../../assets/icons/auth/facebook.png";
 import facebookWhite from "../../assets/icons/auth/facebook-white.png";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
@@ -79,9 +78,10 @@ export const Signup = () => {
         <div className={`${flex} gap-[15px] max-w-[350px] w-full`}>
             <div className={`${flex} p-[40px] items-center ${greyBorder} `}>
                 <div
-                    className="logo h-[55px] w-[170px] cursor-pointer mb-[20px]"
-                    style={{ backgroundImage: `url(${instagram})`, backgroundPositionY: "134px" }}
-                ></div>
+                    className={`logo w-[170px] cursor-pointer mb-[20px] ${flexPrimary} justify-center`}
+                >
+                    <Instagram className="w-[100%]" />
+                </div>
                 <h1 className="text-[16px] text-text-grey font-medium text-center mb-[15px]">
                     Sign up to see photos and videos from your friends.
                 </h1>

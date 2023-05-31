@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Routes, Route, redirect, Navigate } from "react-router-dom";
-import AuthRouter from "../auth/AuthWrapper";
+import { Routes, Route, Navigate } from "react-router-dom";
+import AuthRouter from "./routers/AuthRouter";
 
 const AppRouter = () => {
     const login = false;

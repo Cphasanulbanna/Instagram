@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //icons
-import instagram from "../../assets/icons/auth/instagram.png";
+import { ReactComponent as Instagram } from "../../assets/icons/auth/insta.svg";
 import facebook from "../../assets/icons/auth/facebook.png";
 import { Input } from "../reusable-components/Input";
 import * as yup from "yup";
@@ -67,10 +67,9 @@ export const Login = () => {
     return (
         <div className={`${flex} gap-[15px] max-w-[350px] w-full`}>
             <div className={`${flex} p-[40px] pb-[0px] items-center ${greyBorder} `}>
-                <div
-                    className="logo h-[55px] w-[170px] cursor-pointer mb-[40px]"
-                    style={{ backgroundImage: `url(${instagram})`, backgroundPositionY: "134px" }}
-                ></div>
+                <div className="logo  cursor-pointer mb-[40px] w-[170px]">
+                    <Instagram className="w-[100%]" />
+                </div>
                 <form
                     onSubmit={login}
                     className={`input-container w-full ${flex} gap-[20px]`}

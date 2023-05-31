@@ -37,10 +37,10 @@ export const Menu = () => {
         setViewSettings((prev) => !prev);
     };
     const flex = "flex items-center justify-between";
-    const active = "";
+
     return (
         <div
-            className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px] relative border-r-[1px] border-solid border-light-grey h-[100vh]`}
+            className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh]`}
         >
             <div className="mb-[50px]">
                 <Instagram className="w-[110px] cursor-pointer" />

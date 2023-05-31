@@ -2,10 +2,10 @@ import React from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthRouter from "./routers/AuthRouter";
-import { Home } from "../../pages/Home";
+import HomeRouter from "./routers/HomeRouter";
 
 const AppRouter = () => {
-    const login = true;
+    // const login = true;
     return (
         <Routes>
             <Route
@@ -13,13 +13,13 @@ const AppRouter = () => {
                 element={<AuthRouter />}
             />
             <Route
-                path="/"
-                element={<Home />}
+                path="/*"
+                element={<HomeRouter />}
             />
-            <Route
+            {/* <Route
                 path="/"
-                element={!login ? <Navigate to="/accounts/login" /> : <Navigate to="/" />}
-            />
+                element={!login ? <Navigate to="/accounts/login" /> : <Navigate to="/*" />}
+            /> */}
         </Routes>
     );
 };

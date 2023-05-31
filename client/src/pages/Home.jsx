@@ -1,10 +1,5 @@
 import React from "react";
-import { Menu } from "../components/Menu";
 
 export const Home = () => {
-    return (
-        <div>
-            <Menu />
-        </div>
-    );
+    return <section className="max-w-[470px] w-[100%] flex flex-col gap-[15px]">home</section>;
 };

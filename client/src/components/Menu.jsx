@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { showSearchBar } from "../redux/modalSlice";
+
+import { SearchBar } from "./SearchBar";
+
 import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
 import { ReactComponent as Home } from "../assets/icons/menu/home.svg";
 import { ReactComponent as HomeBlack } from "../assets/icons/menu/home-black.svg";
@@ -26,6 +31,22 @@ export const Menu = () => {
         { id: 7, name: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
 
+    const showsearchbar = useSelector((state) => state.modal.showSearchBar);
+    const dispatch = useDispatch();
+
+    console.log(showsearchbar);
+
+    const openModal = (name) => {
+        switch (name) {
+            case "Search":
+                dispatch(showSearchBar());
+                break;
+
+            default:
+                break;
+        }
+    };
+
     const [selectedIcon, setSelectedIcon] = useState("Home");
     const [viewSettings, setViewSettings] = useState(false);
 
@@ -39,35 +60,46 @@ export const Menu = () => {
     const flex = "flex items-center justify-between";
 
     return (
-        <div
-            className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] fixed z-10 left-0 top-0`}
-        >
-            <div className="mb-[50px]">
-                <Instagram className="w-[110px] cursor-pointer" />
-            </div>
-            <div className={`flex flex-col gap-[40px] items-start`}>
-                {tabs.map((item) => (
-                    <div
-                        key={item.id}
-                        className={`${flex} gap-[15px] cursor-pointer`}
-                        onClick={() => select(item.name)}
-                    >
-                        <div className={`w-[24px] ${selectedIcon}`}>
-                            {selectedIcon === item.name && item?.blackIcon
-                                ? item.blackIcon
-                                : item.icon}
-                        </div>
-                        <h3 className={selectedIcon === item.name && "font-bold"}>{item.name}</h3>
-                    </div>
-                ))}
-            </div>
+        <>
+            <SearchBar />
             <div
-                onClick={showSettings}
-                className="fixed bottom-[30px] w-[100%] left-[30px] flex items-center gap-[15px] cursor-pointer"
+                style={
+                    showsearchbar ? { maxWidth: "100px", transition: "all 0.5s ease-in-out" } : {}
+                }
+                className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] fixed z-10 left-0 top-0`}
             >
-                {viewSettings ? <HamburgerBlack /> : <Hamburger />}
-                <h3 className={viewSettings && "font-bold"}>More</h3>
+                <div className="mb-[50px]">
+                    <Instagram className="w-[110px] cursor-pointer" />
+                </div>
+                <div className={`flex flex-col gap-[40px] items-start`}>
+                    {tabs.map((item) => (
+                        <div
+                            key={item.id}
+                            className={`${flex} gap-[15px] cursor-pointer`}
+                            onClick={() => {
+                                select(item.name);
+                                openModal(item.name);
+                            }}
+                        >
+                            <div className={`w-[24px] ${selectedIcon}`}>
+                                {selectedIcon === item.name && item?.blackIcon
+                                    ? item.blackIcon
+                                    : item.icon}
+                            </div>
+                            <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
+                                {item.name}
+                            </h3>
+                        </div>
+                    ))}
+                </div>
+                <div
+                    onClick={showSettings}
+                    className="fixed bottom-[30px] w-[100%] left-[30px] flex items-center gap-[15px] cursor-pointer"
+                >
+                    {viewSettings ? <HamburgerBlack /> : <Hamburger />}
+                    <h3 className={viewSettings && "font-bold"}>More</h3>
+                </div>
             </div>
-        </div>
+        </>
     );
 };

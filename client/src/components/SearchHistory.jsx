@@ -2,7 +2,7 @@ import React from "react";
 
 import profile from "../assets/icons/stories/profile.png";
 
-export const History = () => {
+export const SearchHistory = () => {
     return (
         <div className="flex gap-[15px] items-center justify-between">
             <div className="w-[45px] h-[45px] cursor-pointer rounded-full overflow-hidden">

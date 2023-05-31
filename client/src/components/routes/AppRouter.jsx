@@ -2,9 +2,10 @@ import React from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthRouter from "./routers/AuthRouter";
+import { Home } from "../../pages/Home";
 
 const AppRouter = () => {
-    const login = false;
+    const login = true;
     return (
         <Routes>
             <Route
@@ -13,7 +14,11 @@ const AppRouter = () => {
             />
             <Route
                 path="/"
-                element={!login && <Navigate to="/accounts/login" />}
+                element={<Home />}
+            />
+            <Route
+                path="/"
+                element={!login ? <Navigate to="/accounts/login" /> : <Navigate to="/" />}
             />
         </Routes>
     );

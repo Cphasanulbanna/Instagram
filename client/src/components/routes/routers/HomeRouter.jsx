@@ -8,7 +8,7 @@ const HomeRouter = () => {
     return (
         <section className="flex">
             <Menu />
-            <section className="max-w-[935px] pt-[40px] px-[20px] mx-[0 auto]">
+            <section className="max-w-[935px] pt-[40px] px-[20px] mx-[0 auto] ml-[450px]">
                 <Routes>
                     <Route
                         path="/"

@@ -12,7 +12,7 @@ const Stories = () => {
         { id: 6, image: profile, name: "person new 444" },
     ];
     return (
-        <div className="w-[100%] bordr-[1px] border-solid border-light-grey overflow-hidden rounded-[12px] p-[10px]">
+        <div className="w-[100%] border-[1px] border-solid border-light-grey overflow-hidden rounded-[12px] p-[10px]">
             <div className="overflow-x-scroll flex gap-[20px] w-full">
                 {profiles.map((profile) => (
                     <div

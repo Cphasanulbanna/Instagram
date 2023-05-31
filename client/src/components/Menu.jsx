@@ -40,7 +40,7 @@ export const Menu = () => {
 
     return (
         <div
-            className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh]`}
+            className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] fixed z-10 left-0 top-0`}
         >
             <div className="mb-[50px]">
                 <Instagram className="w-[110px] cursor-pointer" />

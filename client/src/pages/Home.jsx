@@ -2,6 +2,7 @@ import React from "react";
 import Stories from "../components/Stories";
 import Feed from "../components/Feed";
 import { Suggestions } from "../components/suggestion/Suggestions";
+import { Reels } from "../components/Reels";
 
 export const Home = () => {
     return (

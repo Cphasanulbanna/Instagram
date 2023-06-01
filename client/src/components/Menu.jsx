@@ -24,6 +24,7 @@ import { ReactComponent as Add } from "../assets/icons/menu/add.svg";
 import { ReactComponent as AddBlack } from "../assets/icons/menu/add-black.svg";
 import { ReactComponent as Hamburger } from "../assets/icons/menu/hamburger.svg";
 import { ReactComponent as HamburgerBlack } from "../assets/icons/menu/hamburger-black.svg";
+import { useNavigate } from "react-router-dom";
 
 export const Menu = () => {
     //states
@@ -34,13 +35,13 @@ export const Menu = () => {
     const dispatch = useDispatch();
 
     const tabs = [
-        { id: 1, name: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
+        { id: 1, path: "/", name: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
         { id: 2, name: "Search", icon: <Search /> },
-        { id: 3, name: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
-        { id: 4, name: "Reels", icon: <Reel /> },
-        { id: 5, name: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
-        { id: 6, name: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
-        { id: 7, name: "Create", icon: <Add />, blackIcon: <AddBlack /> },
+        { id: 3, path: "/", name: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
+        { id: 4, path: "/reels", name: "Reels", icon: <Reel /> },
+        { id: 5, path: "/", name: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
+        { id: 6, path: "/", name: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
+        { id: 7, path: "/", name: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
 
     const openModal = (name) => {
@@ -54,8 +55,15 @@ export const Menu = () => {
         }
     };
 
-    const select = (icon) => {
+    const navigate = useNavigate();
+
+    const select = (icon, route) => {
         setSelectedIcon(icon);
+        if (route === "/reels") {
+            navigate("/reels");
+        } else {
+            navigate("/");
+        }
     };
 
     const showSettings = () => {
@@ -66,10 +74,6 @@ export const Menu = () => {
     const flex = "flex items-center justify-between";
 
     //animations
-    const TextAnimation = showsearchbar
-        ? { opacity: "0.4", transition: "all 0.5s ease-in-out" }
-        : { opacity: "1", transition: "all 0.5s ease-in-out" };
-
     const MenuAnimation = showsearchbar
         ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
         : { transition: "all 0.5s ease-in-out" };
@@ -91,7 +95,7 @@ export const Menu = () => {
                                 key={item.id}
                                 className={`${flex} gap-[15px] cursor-pointer`}
                                 onClick={() => {
-                                    select(item.name);
+                                    select(item.name, item?.path);
                                     openModal(item.name);
                                 }}
                             >
@@ -100,10 +104,7 @@ export const Menu = () => {
                                         ? item.blackIcon
                                         : item.icon}
                                 </div>
-                                <h3
-                                    style={TextAnimation}
-                                    className={selectedIcon === item.name ? "font-bold" : ""}
-                                >
+                                <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
                                     {item.name}
                                 </h3>
                             </div>
@@ -115,12 +116,7 @@ export const Menu = () => {
                     className=" overflow-hidden flex items-center gap-[15px] cursor-pointer min-w-[150px]"
                 >
                     {viewSettings ? <HamburgerBlack /> : <Hamburger />}
-                    <h3
-                        style={TextAnimation}
-                        className={`${viewSettings && "font-bold"}`}
-                    >
-                        More
-                    </h3>
+                    <h3 className={`${viewSettings && "font-bold"}`}>More</h3>
                 </div>
             </div>
         </>

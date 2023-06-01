@@ -74,43 +74,45 @@ export const Menu = () => {
                         ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
                         : { transition: "all 0.5s ease-in-out" }
                 }
-                className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-100 left-0 top-0`}
+                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-100 left-0 top-0`}
             >
-                <div className="mb-[50px]">
-                    <Instagram className="w-[110px] cursor-pointer" />
-                </div>
-                <div className={`flex flex-col gap-[40px] items-start`}>
-                    {tabs.map((item) => (
-                        <div
-                            key={item.id}
-                            className={`${flex} gap-[15px] cursor-pointer`}
-                            onClick={() => {
-                                select(item.name);
-                                openModal(item.name);
-                            }}
-                        >
-                            <div className={`w-[24px] ${selectedIcon}`}>
-                                {selectedIcon === item.name && item?.blackIcon
-                                    ? item.blackIcon
-                                    : item.icon}
+                <div className="flex flex-col">
+                    <div className="mb-[50px]">
+                        <Instagram className="w-[110px] cursor-pointer" />
+                    </div>
+                    <div className={`flex flex-col gap-[40px] items-start`}>
+                        {tabs.map((item) => (
+                            <div
+                                key={item.id}
+                                className={`${flex} gap-[15px] cursor-pointer`}
+                                onClick={() => {
+                                    select(item.name);
+                                    openModal(item.name);
+                                }}
+                            >
+                                <div className={`w-[24px] ${selectedIcon}`}>
+                                    {selectedIcon === item.name && item?.blackIcon
+                                        ? item.blackIcon
+                                        : item.icon}
+                                </div>
+                                <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
+                                    {item.name}
+                                </h3>
                             </div>
-                            <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
-                                {item.name}
-                            </h3>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
                 <div
                     onClick={showSettings}
-                    className="fixed bottom-[30px] overflow-hidden left-[30px] flex items-center gap-[15px] cursor-pointer"
+                    className=" overflow-hidden flex items-center gap-[15px] cursor-pointer min-w-[70px] w-350px"
                 >
                     {viewSettings ? (
-                        <div>
-                            <HamburgerBlack className="w-[24px]" />
+                        <div className="w-[24px] h-[24px]">
+                            <HamburgerBlack />
                         </div>
                     ) : (
                         <div>
-                            <Hamburger className="w-[24px]" />
+                            <Hamburger />
                         </div>
                     )}
                     <h3
@@ -119,7 +121,7 @@ export const Menu = () => {
                                 ? { width: "0px", transition: "all 0.5s ease-in-out" }
                                 : { transition: "all 0.5s ease-in-out" }
                         }
-                        className={`${viewSettings && "font-bold"} w-[350px]`}
+                        className={`${viewSettings && "font-bold"}`}
                     >
                         More
                     </h3>

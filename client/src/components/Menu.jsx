@@ -64,9 +64,11 @@ export const Menu = () => {
             <SearchBar />
             <div
                 style={
-                    showsearchbar ? { maxWidth: "100px", transition: "all 0.5s ease-in-out" } : {}
+                    showsearchbar
+                        ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
+                        : { transition: "all 0.5s ease-in-out" }
                 }
-                className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] fixed z-10 left-0 top-0`}
+                className={`w-[100%] max-w-[270px] flex-col flex py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-100 left-0 top-0`}
             >
                 <div className="mb-[50px]">
                     <Instagram className="w-[110px] cursor-pointer" />
@@ -94,10 +96,23 @@ export const Menu = () => {
                 </div>
                 <div
                     onClick={showSettings}
-                    className="fixed bottom-[30px] w-[100%] left-[30px] flex items-center gap-[15px] cursor-pointer"
+                    className="fixed bottom-[30px] overflow-hidden left-[30px] flex items-center gap-[15px] cursor-pointer"
                 >
-                    {viewSettings ? <HamburgerBlack /> : <Hamburger />}
-                    <h3 className={viewSettings && "font-bold"}>More</h3>
+                    {viewSettings ? (
+                        <HamburgerBlack className="w-[24px]" />
+                    ) : (
+                        <Hamburger className="w-[24px]" />
+                    )}
+                    <h3
+                        style={
+                            showsearchbar
+                                ? { width: "0px", transition: "all 0.5s ease-in-out" }
+                                : { transition: "all 0.5s ease-in-out" }
+                        }
+                        className={`${viewSettings && "font-bold"} w-[50px] transition`}
+                    >
+                        More
+                    </h3>
                 </div>
             </div>
         </>

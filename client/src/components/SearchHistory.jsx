@@ -12,7 +12,7 @@ export const SearchHistory = () => {
                         alt="profile"
                     />
                 </div>
-                <div className="flex flex-col gap-[5px]">
+                <div className="flex flex-col">
                     <h5 className="text-[14px] font-medium">user_name___</h5>
                     <p className="text-[12px] cursor-pointer text-text-grey">name</p>
                 </div>

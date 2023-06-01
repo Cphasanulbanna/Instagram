@@ -27,6 +27,7 @@ export default {
                 "blue-text-2": " #776b99",
                 "text-black": "#000",
                 "light-grey": "#dbdbdb",
+                "light-grey-2": "#efefef",
                 "text-grey": "#737373",
                 "text-white": "#fff",
             },

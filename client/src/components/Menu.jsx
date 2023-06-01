@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { showSearchBar } from "../redux/modalSlice";
 
+//packages
+import { useSelector, useDispatch } from "react-redux";
+
+//components
 import { SearchBar } from "./SearchBar";
 
+import { showSearchBar } from "../redux/modalSlice";
+
+//images
 import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
 import { ReactComponent as Home } from "../assets/icons/menu/home.svg";
 import { ReactComponent as HomeBlack } from "../assets/icons/menu/home-black.svg";
@@ -21,6 +26,13 @@ import { ReactComponent as Hamburger } from "../assets/icons/menu/hamburger.svg"
 import { ReactComponent as HamburgerBlack } from "../assets/icons/menu/hamburger-black.svg";
 
 export const Menu = () => {
+    //states
+    const [selectedIcon, setSelectedIcon] = useState("Home");
+    const [viewSettings, setViewSettings] = useState(false);
+
+    const showsearchbar = useSelector((state) => state.modal.showSearchBar);
+    const dispatch = useDispatch();
+
     const tabs = [
         { id: 1, name: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
         { id: 2, name: "Search", icon: <Search /> },
@@ -30,11 +42,6 @@ export const Menu = () => {
         { id: 6, name: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
         { id: 7, name: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
-
-    const showsearchbar = useSelector((state) => state.modal.showSearchBar);
-    const dispatch = useDispatch();
-
-    console.log(showsearchbar);
 
     const openModal = (name) => {
         switch (name) {
@@ -47,9 +54,6 @@ export const Menu = () => {
         }
     };
 
-    const [selectedIcon, setSelectedIcon] = useState("Home");
-    const [viewSettings, setViewSettings] = useState(false);
-
     const select = (icon) => {
         setSelectedIcon(icon);
     };
@@ -57,6 +61,8 @@ export const Menu = () => {
     const showSettings = () => {
         setViewSettings((prev) => !prev);
     };
+
+    //resusable class
     const flex = "flex items-center justify-between";
 
     return (
@@ -99,9 +105,13 @@ export const Menu = () => {
                     className="fixed bottom-[30px] overflow-hidden left-[30px] flex items-center gap-[15px] cursor-pointer"
                 >
                     {viewSettings ? (
-                        <HamburgerBlack className="w-[24px]" />
+                        <div>
+                            <HamburgerBlack className="w-[24px]" />
+                        </div>
                     ) : (
-                        <Hamburger className="w-[24px]" />
+                        <div>
+                            <Hamburger className="w-[24px]" />
+                        </div>
                     )}
                     <h3
                         style={
@@ -109,7 +119,7 @@ export const Menu = () => {
                                 ? { width: "0px", transition: "all 0.5s ease-in-out" }
                                 : { transition: "all 0.5s ease-in-out" }
                         }
-                        className={`${viewSettings && "font-bold"} w-[50px] transition`}
+                        className={`${viewSettings && "font-bold"} w-[350px]`}
                     >
                         More
                     </h3>

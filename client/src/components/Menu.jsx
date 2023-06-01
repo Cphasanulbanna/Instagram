@@ -65,16 +65,21 @@ export const Menu = () => {
     //resusable class
     const flex = "flex items-center justify-between";
 
+    //animations
+    const TextAnimation = showsearchbar
+        ? { opacity: "0.4", transition: "all 0.5s ease-in-out" }
+        : { opacity: "1", transition: "all 0.5s ease-in-out" };
+
+    const MenuAnimation = showsearchbar
+        ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
+        : { transition: "all 0.5s ease-in-out" };
+
     return (
         <>
             <SearchBar />
             <div
-                style={
-                    showsearchbar
-                        ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
-                        : { transition: "all 0.5s ease-in-out" }
-                }
-                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-100 left-0 top-0`}
+                style={MenuAnimation}
+                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-[50] left-0 top-0`}
             >
                 <div className="flex flex-col">
                     <div className="mb-[50px]">
@@ -95,7 +100,10 @@ export const Menu = () => {
                                         ? item.blackIcon
                                         : item.icon}
                                 </div>
-                                <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
+                                <h3
+                                    style={TextAnimation}
+                                    className={selectedIcon === item.name ? "font-bold" : ""}
+                                >
                                     {item.name}
                                 </h3>
                             </div>
@@ -104,23 +112,11 @@ export const Menu = () => {
                 </div>
                 <div
                     onClick={showSettings}
-                    className=" overflow-hidden flex items-center gap-[15px] cursor-pointer min-w-[70px] w-350px"
+                    className=" overflow-hidden flex items-center gap-[15px] cursor-pointer min-w-[150px]"
                 >
-                    {viewSettings ? (
-                        <div className="w-[24px] h-[24px]">
-                            <HamburgerBlack />
-                        </div>
-                    ) : (
-                        <div>
-                            <Hamburger />
-                        </div>
-                    )}
+                    {viewSettings ? <HamburgerBlack /> : <Hamburger />}
                     <h3
-                        style={
-                            showsearchbar
-                                ? { width: "0px", transition: "all 0.5s ease-in-out" }
-                                : { transition: "all 0.5s ease-in-out" }
-                        }
+                        style={TextAnimation}
                         className={`${viewSettings && "font-bold"}`}
                     >
                         More

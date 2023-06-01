@@ -11,10 +11,10 @@ export const SearchBar = () => {
         <div
             style={
                 showsearchbar
-                    ? { left: "70px", transition: "all 0.5s ease-in-out" }
-                    : { transition: "all 0.5s ease-in-out" }
+                    ? { left: "70px", transition: "all 0.5s ease-in-out", opacity: "1" }
+                    : { transition: "all 0.5s ease-in-out", opacity: "0.3" }
             }
-            className={`search-bar max-w-[399px] w-[100%] border-[1px] border-solid border-light-grey border-l-0 border-b-0 border-t-0 h-[100vh] rounded-[10px] overflow-hidden absolute z-[-1] left-[-320px] bg-text-white`}
+            className={`search-bar max-w-[399px] w-[100%] border-[1px] border-solid border-light-grey border-l-0 border-b-0 border-t-0 h-[100vh] rounded-[10px] overflow-hidden fixed z-[1] left-[-320px] bg-text-white`}
         >
             <div className="pb-[15px] pt-[20px] px-[15px] flex flex-col gap-[30px]">
                 <h1 className="text-[22px] font-medium">Search</h1>

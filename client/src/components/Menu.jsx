@@ -62,7 +62,9 @@ export const Menu = () => {
         if (route === "/reels") {
             navigate("/reels");
         } else {
-            navigate("/");
+            if (route) {
+                navigate("/");
+            }
         }
     };
 

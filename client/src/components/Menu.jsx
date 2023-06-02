@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 //components
 import { SearchBar } from "./SearchBar";
 
-import { showSearchBar } from "../redux/modalSlice";
+import { showPanel } from "../redux/modalSlice";
 
 //images
 import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
@@ -25,13 +25,15 @@ import { ReactComponent as AddBlack } from "../assets/icons/menu/add-black.svg";
 import { ReactComponent as Hamburger } from "../assets/icons/menu/hamburger.svg";
 import { ReactComponent as HamburgerBlack } from "../assets/icons/menu/hamburger-black.svg";
 import { useNavigate } from "react-router-dom";
+import { Notification } from "./notifications/Notification";
 
 export const Menu = () => {
     //states
     const [selectedIcon, setSelectedIcon] = useState("Home");
     const [viewSettings, setViewSettings] = useState(false);
 
-    const showsearchbar = useSelector((state) => state.modal.showSearchBar);
+    const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
+
     const dispatch = useDispatch();
 
     const tabs = [
@@ -40,16 +42,18 @@ export const Menu = () => {
         { id: 3, path: "/", name: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
         { id: 4, path: "/reels", name: "Reels", icon: <Reel /> },
         { id: 5, path: "/", name: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
-        { id: 6, path: "/", name: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
+        { id: 6, name: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
         { id: 7, path: "/", name: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
 
-    const openModal = (name) => {
-        switch (name) {
+    const handlePanels = (TYPE) => {
+        switch (TYPE) {
             case "Search":
-                dispatch(showSearchBar());
+                dispatch(showPanel("SEARCH_BAR"));
                 break;
-
+            case "Notifications":
+                dispatch(showPanel("NOTIFICATION_BAR"));
+                break;
             default:
                 break;
         }
@@ -76,13 +80,15 @@ export const Menu = () => {
     const flex = "flex items-center justify-between";
 
     //animations
-    const MenuAnimation = showsearchbar
-        ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
-        : { transition: "all 0.5s ease-in-out" };
+    const MenuAnimation =
+        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+            ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
+            : { transition: "all 0.5s ease-in-out" };
 
     return (
         <>
             <SearchBar />
+            <Notification />
             <div
                 style={MenuAnimation}
                 className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed  z-[50] `}
@@ -98,7 +104,7 @@ export const Menu = () => {
                                 className={`${flex} gap-[15px] cursor-pointer`}
                                 onClick={() => {
                                     select(item.name, item?.path);
-                                    openModal(item.name);
+                                    handlePanels(item.name);
                                 }}
                             >
                                 <div className={`w-[24px] ${selectedIcon}`}>

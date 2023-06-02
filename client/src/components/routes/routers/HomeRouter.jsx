@@ -6,11 +6,17 @@ import { Home } from "../../../pages/Home";
 import { Reels } from "../../Reels";
 
 const HomeRouter = () => {
+    const location = useLocation();
+
     return (
-        <section className="flex">
+        <section className="flex justify-between">
             <Menu />
             <section
-                className={` max-w-[935px] pt-[40px] px-[20px] mx-[0 auto] transition w-full ml-[450px]`}
+                style={{
+                    maxWidth: "calc(100% - 410px)",
+                    margin: `${location.pathname === "/" ? "0 auto" : ""} `,
+                }}
+                className={`pt-[40px] px-[20px] flex justify-end transition w-full`}
             >
                 <Routes>
                     <Route

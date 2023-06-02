@@ -18,7 +18,7 @@ export const Reels = () => {
     ];
 
     return (
-        <section className="flex justify-center items-center">
+        <section className="flex  items-center">
             <div className="max-w-[450px] w-[100%] flex flex-col justify-center items-center gap-[20px] overflow-y-scroll">
                 {videos.map((video, index) => (
                     <div

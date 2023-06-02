@@ -85,7 +85,7 @@ export const Menu = () => {
             <SearchBar />
             <div
                 style={MenuAnimation}
-                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed z-[50] left-0 top-0`}
+                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed  z-[50] `}
             >
                 <div className="flex flex-col">
                     <div className="mb-[50px]">

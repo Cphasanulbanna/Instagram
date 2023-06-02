@@ -29,7 +29,7 @@ import { Notification } from "./notifications/Notification";
 
 export const Menu = () => {
     //states
-    const [selectedIcon, setSelectedIcon] = useState("Home");
+    const [selectedPanel, setSelectedPanel] = useState("Home");
     const [viewSettings, setViewSettings] = useState(false);
 
     const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
@@ -47,29 +47,22 @@ export const Menu = () => {
     ];
 
     const handlePanels = (TYPE) => {
-        switch (TYPE) {
-            case "Search":
-                dispatch(showPanel("SEARCH_BAR"));
-                break;
-            case "Notifications":
-                dispatch(showPanel("NOTIFICATION_BAR"));
-                break;
-            default:
-                break;
+        const panelActions = {
+            Search: "SEARCH_BAR",
+            Notifications: "NOTIFICATION_BAR",
+        };
+        const panelType = panelActions[TYPE];
+        if (panelType && SHOW_PANEL !== panelType) {
+            dispatch(showPanel(panelType));
         }
     };
 
     const navigate = useNavigate();
 
-    const select = (icon, route) => {
-        setSelectedIcon(icon);
-        if (route === "/reels") {
-            navigate("/reels");
-        } else {
-            if (route) {
-                navigate("/");
-            }
-        }
+    const select = (type, route) => {
+        setSelectedPanel(type);
+        dispatch(showPanel(""));
+        route && navigate(route);
     };
 
     const showSettings = () => {
@@ -107,12 +100,12 @@ export const Menu = () => {
                                     handlePanels(item.name);
                                 }}
                             >
-                                <div className={`w-[24px] ${selectedIcon}`}>
-                                    {selectedIcon === item.name && item?.blackIcon
+                                <div className={`w-[24px] ${selectedPanel}`}>
+                                    {selectedPanel === item.name && item?.blackIcon
                                         ? item.blackIcon
                                         : item.icon}
                                 </div>
-                                <h3 className={selectedIcon === item.name ? "font-bold" : ""}>
+                                <h3 className={selectedPanel === item.name ? "font-bold" : ""}>
                                     {item.name}
                                 </h3>
                             </div>

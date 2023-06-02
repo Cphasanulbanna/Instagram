@@ -9,7 +9,7 @@ export const modalSlice = createSlice({
     initialState,
     reducers: {
         showPanel: (state, actions) => {
-            state.showPanel = actions.payload === state.showPanel ? "" : actions.payload;
+            state.showPanel = actions.payload;
         },
     },
 });

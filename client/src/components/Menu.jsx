@@ -10,6 +10,7 @@ import { showPanel } from "../redux/modalSlice";
 
 //images
 import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
+import { ReactComponent as InstagramSmall } from "../assets/icons/menu/instagramlogo-small.svg";
 import { ReactComponent as Home } from "../assets/icons/menu/home.svg";
 import { ReactComponent as HomeBlack } from "../assets/icons/menu/home-black.svg";
 import { ReactComponent as Search } from "../assets/icons/menu/search.svg";
@@ -68,13 +69,23 @@ export const Menu = () => {
 
     //resusable class
     const flex = "flex items-center justify-between";
+    const transition = "all 0.5s ease-in-out";
 
     //animations
     const MenuAnimation =
         SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
-            ? { maxWidth: "70px", transition: "all 0.5s ease-in-out" }
-            : { transition: "all 0.5s ease-in-out" };
+            ? { maxWidth: "70px", transition: transition }
+            : { transition: transition };
 
+    const LogoAnimation2 =
+        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+            ? { transform: "scale(1, 1)", transition: transition }
+            : { transform: "scale(0, 0)", transition: transition };
+
+    const LogoAnimation1 =
+        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+            ? { transition: transition, opacity: 0 }
+            : { transition: transition, opacity: 1 };
     return (
         <>
             <SearchBar />
@@ -88,7 +99,21 @@ export const Menu = () => {
             >
                 <div className="flex flex-col">
                     <div className="mb-[50px]">
-                        <Instagram className="w-[110px] cursor-pointer" />
+                        <div
+                            className="relative"
+                            style={{
+                                transition: "all 0.5s ease-in-out",
+                            }}
+                        >
+                            <Instagram
+                                style={LogoAnimation1}
+                                className="w-[110px] cursor-pointer"
+                            />
+                            <InstagramSmall
+                                style={LogoAnimation2}
+                                className={`absolute z-50 left-[0px] top-[0px] scale-0 cursor-pointer`}
+                            />
+                        </div>
                     </div>
                     <div className={`flex flex-col gap-[40px] items-start`}>
                         {tabs.map((item) => (

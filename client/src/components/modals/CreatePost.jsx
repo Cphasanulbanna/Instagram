@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { ReactComponent as AddPost } from "../../assets/icons/add-posts/add-post.svg";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";
 import ModalWrapper from "../reusable-components/ModalWrapper";
+import { useDispatch } from "react-redux";
+import { showPanel } from "../../redux/modalSlice";
 
 export const CreatePost = () => {
     const handlePostUpload = () => {};
+
+    const dispatch = useDispatch();
+
+    const hideModal = () => {
+        dispatch(showPanel(""));
+    };
+
     return (
-        <ModalWrapper>
+        <ModalWrapper hideModal={hideModal}>
             <div
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
                 className="bg-[#fff] rounded-[8px] overflow-hidden justify-center relative
              flex items-center flex-col h-[70%] w-[40%]"
             >

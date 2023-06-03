@@ -6,12 +6,13 @@ import ModalWrapper from "../reusable-components/ModalWrapper";
 import { useDispatch } from "react-redux";
 import { showPanel } from "../../redux/modalSlice";
 
-export const CreatePost = () => {
+export const CreatePost = ({ setSelectedMenu }) => {
     const handlePostUpload = () => {};
 
     const dispatch = useDispatch();
 
     const hideModal = () => {
+        setSelectedMenu("Home");
         dispatch(showPanel(""));
     };
 

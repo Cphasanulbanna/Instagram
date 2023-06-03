@@ -51,7 +51,15 @@ export const Menu = () => {
     const navigate = useNavigate();
 
     const handleMenus = (MENU, ROUTE) => {
-        setSelectedMenu(MENU);
+        setSelectedMenu((prev) =>
+            prev !== MENU
+                ? MENU
+                : ROUTE === "/reels"
+                ? "Reels"
+                : ROUTE === "/" && SHOW_PANEL === ""
+                ? MENU
+                : "Home"
+        );
         ROUTE && navigate(ROUTE);
         const menuActions = {
             Search: "SEARCH_BAR",
@@ -86,11 +94,13 @@ export const Menu = () => {
         SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
             ? { transition: transition, opacity: 0 }
             : { transition: transition, opacity: 1 };
+
+    const swithcIcons = () => {};
     return (
         <>
             <SearchBar />
             <Notification />
-            {SHOW_PANEL === "CREATE_POST_MODAL" && <CreatePost />}
+            {SHOW_PANEL === "CREATE_POST_MODAL" && <CreatePost setSelectedMenu={setSelectedMenu} />}
             {SHOW_PANEL === "SHOW_SETTINGS" && <Settings />}
 
             <div

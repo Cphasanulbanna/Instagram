@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Menu } from "../../Menu";
 import { Home } from "../../../pages/Home";
 import { Reels } from "../../Reels";
 
 const HomeRouter = () => {
-    const location = useLocation();
-
     return (
         <section className="flex justify-between">
-            <Menu />
-            <section
-                style={{
-                    maxWidth: "calc(100% - 480px)",
-                    margin: `${location.pathname === "/" ? "0 auto" : ""} `,
-                }}
-                className={`pt-[40px] px-[20px] flex justify-end transition w-full`}
-            >
+            <div className="max-w-[270px] w-[20%]">
+                <Menu />
+            </div>
+
+            <section className={`pt-[40px] px-[20px] w-full flex justify-center transition`}>
                 <Routes>
                     <Route
                         path="/"

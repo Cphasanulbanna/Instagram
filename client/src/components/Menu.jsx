@@ -105,7 +105,7 @@ export const Menu = () => {
 
             <div
                 style={MenuAnimation}
-                className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed  z-[50] `}
+                className={`w-[100%] max-w-[270px] lg1:max-w-[unset] lg1:w-[70px] lg4:max-w-[70px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed  z-[50] `}
             >
                 <div className="flex flex-col">
                     <div className="mb-[50px]">
@@ -117,12 +117,13 @@ export const Menu = () => {
                         >
                             <Instagram
                                 style={LogoAnimation1}
-                                className="w-[110px] cursor-pointer"
+                                className="w-[110px] cursor-pointer lg4:hidden"
                             />
                             <InstagramSmall
                                 style={LogoAnimation2}
-                                className={`absolute z-50 left-[0px] top-[0px] scale-0 cursor-pointer`}
+                                className={`absolute z-50 left-[0px] top-[0px] scale-0 cursor-pointer w-[24px] h-[24px]`}
                             />
+                            <InstagramSmall className={` w-[24px] h-[24px] hidden lg4:block`} />
                         </div>
                     </div>
                     <div className={`flex flex-col gap-[40px] items-start`}>

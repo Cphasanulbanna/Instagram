@@ -21,7 +21,7 @@ const Stories = () => {
         padding: "2px",
     };
     return (
-        <div className="w-[100%] border-[1px] border-solid border-light-grey overflow-hidden rounded-[12px] p-[10px]">
+        <div className="w-[100%] border-[1px] border-solid border-light-grey overflow-hidden rounded-[12px] p-[10px] lg1:rounded-[unset]">
             <div className="overflow-x-scroll flex gap-[20px] w-full">
                 {profiles.map((profile) => (
                     <div
@@ -35,7 +35,9 @@ const Stories = () => {
                                 className="object-cover p-[1.5px] bg-text-white rounded-[50%] overflow-hidden"
                             />
                         </div>
-                        <h4 className="text-[12px] text-center">{profile.name}</h4>
+                        <h4 className="text-[12px] text-center h-[20px] overflow-hidden">
+                            {profile.name}
+                        </h4>
                     </div>
                 ))}
             </div>

@@ -3,7 +3,6 @@ import React from "react";
 import Post from "./post/Post";
 
 import imagePost from "../assets/images/feed/unsplash_d2zvqp3fpro.png";
-import ReactPlayer from "react-player";
 
 const Feed = () => {
     const video = "https://youtube.com/shorts/ZV1FLNxdp6E?feature=share";
@@ -14,11 +13,11 @@ const Feed = () => {
     ];
 
     return (
-        <>
+        <div className="lg1:w-[70%] lg1:mx-auto flex flex-col gap-[25px]">
             {medias.map((media) => (
                 <Post media={media} />
             ))}
-        </>
+        </div>
     );
 };
 

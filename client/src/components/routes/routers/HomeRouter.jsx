@@ -13,7 +13,7 @@ const HomeRouter = () => {
             <Menu />
             <section
                 style={{
-                    maxWidth: "calc(100% - 410px)",
+                    maxWidth: "calc(100% - 480px)",
                     margin: `${location.pathname === "/" ? "0 auto" : ""} `,
                 }}
                 className={`pt-[40px] px-[20px] flex justify-end transition w-full`}

@@ -26,6 +26,7 @@ import { ReactComponent as Hamburger } from "../assets/icons/menu/hamburger.svg"
 import { ReactComponent as HamburgerBlack } from "../assets/icons/menu/hamburger-black.svg";
 import { useNavigate } from "react-router-dom";
 import { Notification } from "./notifications/Notification";
+import { CreatePost } from "./modals/CreatePost";
 
 export const Menu = () => {
     //states
@@ -82,6 +83,7 @@ export const Menu = () => {
         <>
             <SearchBar />
             <Notification />
+            <CreatePost />
             <div
                 style={MenuAnimation}
                 className={`w-[100%] max-w-[270px] flex-col flex justify-between py-[30px] px-[30px]  border-r-[1px] border-solid border-light-grey h-[100vh] bg-text-white overflow-hidden fixed  z-[50] `}

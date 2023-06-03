@@ -1,8 +1,10 @@
 import React from "react";
 
-const ModalWrapper = () => {
+const ModalWrapper = ({ children }) => {
     return (
-        <section className="w-[100%] h-[100%] flex justify-center items-center bg-[rgba(0,0,0,0.1)] fixed inset-0 z-50"></section>
+        <section className="w-[100%] h-[100%] flex justify-center items-center bg-[rgba(0,0,0,0.1)] fixed inset-0 z-[200]">
+            {children}
+        </section>
     );
 };
 

@@ -6,7 +6,7 @@ import { ReactComponent as RightArrow } from "../../assets/icons/notifications/r
 export const RequestPanel = () => {
     return (
         <div
-            style={{ borderBottom: "1px solid #dbdbdb" }}
+            style={{ borderBottom: "2px solid #dbdbdb" }}
             className="w-full"
         >
             <div className="flex flex-col gap-[15px] p-[15px]">

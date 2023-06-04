@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { SearchHistory } from "./SearchHistory";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { showPanel } from "../redux/modalSlice";
-import OutsideClickHandler from "react-outside-click-handler";
 import { useLocation } from "react-router-dom";
 
 export const SearchBar = ({ clickedItemRef, setSelectedMenu }) => {
@@ -12,13 +11,13 @@ export const SearchBar = ({ clickedItemRef, setSelectedMenu }) => {
 
     const dispatch = useDispatch();
     const searchbarRef = useRef(null);
-    useOutsideClick(searchbarRef, () => SHOW_PANEL === "SEARCH_BAR" && handle(), clickedItemRef);
+    useOutsideClick(searchbarRef, () => handle(), clickedItemRef);
 
     const location = useLocation();
 
     const handle = () => {
+        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "");
         dispatch(showPanel(""));
-        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "Home");
     };
 
     return (

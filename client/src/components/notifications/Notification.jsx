@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ThisWeek from "./ThisWeek";
 import ThisMonth from "./ThisMonth";
 import Earlier from "./Earlier";
-import OutsideClickHandler from "react-outside-click-handler";
 import { showPanel } from "../../redux/modalSlice";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { useLocation } from "react-router-dom";
@@ -14,16 +13,12 @@ export const Notification = ({ clickedItemRef, setSelectedMenu }) => {
     const dispatch = useDispatch();
     const notificanbarRef = useRef(null);
 
-    useOutsideClick(
-        notificanbarRef,
-        () => SHOW_PANEL === "NOTIFICATION_BAR" && handle(),
-        clickedItemRef
-    );
+    useOutsideClick(notificanbarRef, () => handle(), clickedItemRef);
     const location = useLocation();
 
     const handle = () => {
+        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "");
         dispatch(showPanel(""));
-        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "Home");
     };
     return (
         <div

@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useState } from "react";
 
 //packages
 import { useSelector, useDispatch } from "react-redux";
@@ -29,7 +29,6 @@ import { useNavigate } from "react-router-dom";
 import { Notification } from "./notifications/Notification";
 import { CreatePost } from "./modals/CreatePost";
 import { Settings } from "./modals/Settings";
-import useOutsideClick from "../hooks/useOutsideClick";
 
 export const Menu = () => {
     //states
@@ -45,7 +44,13 @@ export const Menu = () => {
         { id: 3, path: "/", menu: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
         { id: 4, path: "/reels", menu: "Reels", icon: <Reel /> },
         { id: 5, path: "/", menu: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
-        { id: 6, menu: "Notifications", icon: <Heart />, blackIcon: <HeartBlack /> },
+        {
+            id: 6,
+            menu: "Notifications",
+            icon: <Heart />,
+            blackIcon: <HeartBlack />,
+            class: "notification",
+        },
         { id: 7, path: "/", menu: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
 
@@ -86,7 +91,7 @@ export const Menu = () => {
     const MenuAnimation =
         SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
             ? { maxWidth: "70px", transition: transition }
-            : { transition: transition };
+            : { transition: transition, transitionDelay: "0.2s" };
 
     const LogoAnimation2 =
         SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"

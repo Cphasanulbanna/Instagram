@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { ReactComponent as SettingsIcon } from "../../assets/icons/settings/settings.svg";
 import { ReactComponent as Activity } from "../../assets/icons/settings/activity.svg";
 import { ReactComponent as Save } from "../../assets/icons/posts/save.svg";
 import { ReactComponent as Theme } from "../../assets/icons/settings/theme.svg";
 import { ReactComponent as Report } from "../../assets/icons/settings/report.svg";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
-export const Settings = () => {
+export const Settings = ({ setOpenSettings, settingsIconRef }) => {
     const data = [
         { id: 1, title: "Settings", icon: <SettingsIcon /> },
         { id: 2, title: "Your Activity", icon: <Activity /> },
@@ -16,8 +17,15 @@ export const Settings = () => {
         { id: 6, title: "Switch accounts" },
         { id: 7, title: "Log out" },
     ];
+
+    const settingsRef = useRef(null);
+
+    useOutsideClick(settingsRef, settingsIconRef, () => setOpenSettings(false));
     return (
-        <ul className="w-[240px] flex flex-col rounded-[6px] overflow-hidden bg-[#fff] z-[200] fixed bottom-[60px] left-[10px] shadow-md">
+        <ul
+            ref={settingsRef}
+            className="w-[240px] flex flex-col rounded-[6px] overflow-hidden bg-[#fff] z-[200] fixed bottom-[60px] left-[10px] shadow-md"
+        >
             {data.map((item) => (
                 <li
                     style={{

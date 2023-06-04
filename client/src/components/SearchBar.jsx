@@ -1,61 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
 import { SearchHistory } from "./SearchHistory";
-// import useOutsideClick from "../hooks/useOutsideClick";
-import { showPanel } from "../redux/modalSlice";
-import { useLocation } from "react-router-dom";
-import OutsideClickHandler from "react-outside-click-handler";
+import useOutsideClick from "../hooks/useOutsideClick";
 
-export const SearchBar = ({ searchbarRef, clickedItemRef, setSelectedMenu }) => {
-    const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
+export const SearchBar = ({ setSearchOPen, searchOpen, searchIconref, setSelectedMenu }) => {
+    const searchbarRef = useRef(null);
 
-    const dispatch = useDispatch();
-    // const searchbarRef = useRef(null);
-    // useOutsideClick(searchbarRef, () => handle(), clickedItemRef);
+    useOutsideClick(searchbarRef, searchIconref, () => callback());
 
-    const location = useLocation();
-
-    const handle = () => {
-        // dispatch(showPanel(""));
-        // e.stopPropagation();
-        // setSelectedMenu(
-        //     location.pathname === "/reels" ? "Reels" : location.pathname === "/" ? "Home" : ""
-        // );
+    const callback = () => {
+        setSelectedMenu("Home");
+        setSearchOPen(false);
     };
 
-    // useOutsideClick(searchbarRef);
-
-    // outside-click function
-    // function useOutsideClick(ref) {
-    //     useEffect(() => {
-    //         function handleClickOutside(event) {
-    //             if (ref.current && !ref.current.contains(event.target)) {
-    //                 if (ref.current.id === "search") {
-    //                     dispatch(showPanel(""));
-    //                 } else if (ref.current.id === "noti") {
-    //                     dispatch(showPanel(""));
-    //                 }
-    //             }
-    //         }
-    //         document.addEventListener("mousedown", handleClickOutside);
-    //         return () => {
-    //             document.removeEventListener("mousedown", handleClickOutside);
-    //         };
-    //     }, [ref]);
-    // }
-
     return (
-        // <OutsideClickHandler
-        //     onOutsideClick={() => {
-        //         dispatch(showPanel(""));
-        //     }}
-        // >
         <div
             id="search"
             ref={searchbarRef}
             style={
-                SHOW_PANEL === "SEARCH_BAR"
+                searchOpen
                     ? { left: "70px", transition: "all 0.5s ease-in-out", opacity: "1" }
                     : { transition: "all 0.5s ease-in-out", opacity: "0.3" }
             }
@@ -86,6 +49,5 @@ export const SearchBar = ({ searchbarRef, clickedItemRef, setSelectedMenu }) => 
                 </div>
             </div>
         </div>
-        // </OutsideClickHandler>
     );
 };

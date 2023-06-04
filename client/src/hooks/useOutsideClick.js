@@ -1,26 +1,21 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showPanel } from "../redux/modalSlice";
-
-export const useOutsideClick = (modalRef, setState) => {
-    const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
-    const dispatch = useDispatch();
-    const handleClickOutside = (event) => {
-        if (modalRef.current && !modalRef.current.contains(event.target)) {
-            SHOW_PANEL !== "" && dispatch(showPanel(""));
-            // setState("Home");
+const useOutsideClick = (ref, ref2, callback) => {
+    const handleClick = (event) => {
+        if (
+            ref.current &&
+            !ref.current.contains(event.target) &&
+            ref2.current &&
+            !ref2.current.contains(event.target)
+        ) {
+            callback();
         }
     };
-
     useEffect(() => {
-        const handleDocumentClick = (event) => {
-            handleClickOutside(event);
-        };
-
-        document.addEventListener("mousedown", handleDocumentClick);
-
+        const handleMouseDown = (event) => handleClick(event);
+        document.addEventListener("mousedown", handleMouseDown);
         return () => {
-            document.removeEventListener("mousedown", handleDocumentClick);
+            document.removeEventListener("mousedown", handleMouseDown);
         };
-    }, [modalRef]);
+    }, [ref, callback, ref2]);
 };
+export default useOutsideClick;

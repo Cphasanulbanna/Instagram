@@ -17,9 +17,9 @@ const HomeRouter = () => {
             </div>
 
             <section
-                onClick={() => {
-                    dispatch(showPanel(""));
-                }}
+                // onClick={() => {
+                //     dispatch(showPanel(""));
+                // }}
                 className={`pt-[40px] lg1:p-0 px-[20px] w-full flex justify-center transition`}
             >
                 <Routes>

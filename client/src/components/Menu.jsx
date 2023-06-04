@@ -1,12 +1,7 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
-
-//packages
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
 
 //components
 import { SearchBar } from "./SearchBar";
-
-import { showPanel } from "../redux/modalSlice";
 
 //images
 import { ReactComponent as Instagram } from "../assets/icons/auth/insta.svg";
@@ -29,108 +24,127 @@ import { useNavigate } from "react-router-dom";
 import { Notification } from "./notifications/Notification";
 import { CreatePost } from "./modals/CreatePost";
 import { Settings } from "./modals/Settings";
-import { useOutsideClick } from "../hooks/useOutsideClick";
-import { useClickAway } from "ahooks";
-// import useOutsideClick from "../hooks/useOutsideClick";
 
 export const Menu = () => {
     //states
     const [selectedMenu, setSelectedMenu] = useState("Home");
+    const [notiOpen, setNotiOpen] = useState(false);
+    const [searchOpen, setSearchOPen] = useState(false);
+    const [openPostModal, setOpenPostModal] = useState(false);
+    const [openSettings, setOpenSettings] = useState(false);
 
-    const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
-
-    const dispatch = useDispatch();
-
+    // console.log(searchOpen, "///");
     const tabs = [
-        { id: 1, path: "/", menu: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
-        { id: 2, menu: "Search", icon: <Search />, class: "search" },
-        { id: 3, path: "/", menu: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
-        { id: 4, path: "/reels", menu: "Reels", icon: <Reel /> },
-        { id: 5, path: "/", menu: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
+        { id: 1, path: "/", menu: "Home", icon: <Home />, blackIcon: <HomeBlack />, type: "link" },
+        { id: 2, menu: "Search", icon: <Search />, class: "search", type: "modal" },
+        {
+            id: 3,
+            path: "/",
+            menu: "Explore",
+            icon: <Explore />,
+            blackIcon: <ExploreBlack />,
+            type: "link",
+        },
+        { id: 4, path: "/reels", menu: "Reels", icon: <Reel />, type: "link" },
+        {
+            id: 5,
+            path: "/",
+            menu: "Messages",
+            icon: <Message />,
+            blackIcon: <MessageBlack />,
+            type: "link",
+        },
         {
             id: 6,
             menu: "Notifications",
             icon: <Heart />,
             blackIcon: <HeartBlack />,
             class: "notification",
+            type: "modal",
         },
-        { id: 7, path: "/", menu: "Create", icon: <Add />, blackIcon: <AddBlack /> },
+        { id: 7, path: "/", menu: "Create", icon: <Add />, blackIcon: <AddBlack />, type: "link" },
     ];
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (SHOW_PANEL === "" && location.pathname === "/") {
-            setSelectedMenu("Home");
-        }
-        if (SHOW_PANEL === "" && location.pathname === "/reels") {
-            setSelectedMenu("Reels");
-        }
-    }, [SHOW_PANEL]);
-
-    const handleMenus = (MENU, ROUTE) => {
-        setSelectedMenu((prev) => (prev !== MENU ? MENU : ROUTE !== "/reels" ? "Home" : ""));
-        ROUTE && navigate(ROUTE);
-        const menuActions = {
-            Search: "SEARCH_BAR",
-            Notifications: "NOTIFICATION_BAR",
-            Create: "CREATE_POST_MODAL",
-            Settings: "SHOW_SETTINGS",
-        };
-        const menuType = menuActions[MENU];
-        if (menuType && SHOW_PANEL !== menuType) {
-            dispatch(showPanel(menuType));
-        } else {
-            dispatch(showPanel(""));
-        }
+    const handleMenus = (menu, route) => {
+        setSelectedMenu((prev) =>
+            prev !== menu ? menu : route !== "/reels" ? "Home" : route === "" ? "Home" : ""
+        );
+        route && navigate(route);
+        setSearchOPen((prev) => menu === "Search" && !prev);
+        setNotiOpen((prev) => menu === "Notifications" && !prev);
+        setOpenPostModal((prev) => menu === "Create" && !prev);
+        setOpenSettings((prev) => menu === "Settings" && !prev);
     };
+
+    console.log(selectedMenu, "***");
+
+    // useEffect(() => {
+    //     if (
+    //         openPostModal === false ||
+    //         openSettings === false ||
+    //         searchOpen === false ||
+    //         notiOpen === false
+    //     ) {
+    //         return setSelectedMenu("Home");
+    //     }
+    //     // return setSelectedMenu("Home");
+    // }, [openPostModal, openPostModal, searchOpen, notiOpen]);
+
     //resusable class
     const flex = "flex items-center justify-between";
     const transition = "all 0.5s ease-in-out";
 
     //animations
     const MenuAnimation =
-        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+        notiOpen || searchOpen || openPostModal
             ? { maxWidth: "70px", transition: transition, transitionDelay: "unset" }
             : { transition: transition, transitionDelay: "0.2s" };
 
     const LogoAnimation2 =
-        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+        notiOpen || searchOpen || openPostModal
             ? { transform: "scale(1, 1)", transition: transition }
             : { transform: "scale(0, 0)", transition: transition };
 
     const LogoAnimation1 =
-        SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
+        notiOpen || searchOpen || openPostModal
             ? { transition: transition, opacity: 0 }
             : { transition: transition, opacity: 1 };
 
     const tabRefs = tabs.map(() => useRef(null));
 
-    // useOutsideClick(notificationRef, notificationIconRef);
-
     const notificationIconRef = tabRefs[5];
-    const notificationRef = useRef(null);
-
-    const searchIconRef = tabRefs[1];
-    const searchbarRef = useRef(null);
-
-    useOutsideClick(searchbarRef);
-    useOutsideClick(notificationRef);
-
-    console.log(SHOW_PANEL, "***");
+    const searchIconref = tabRefs[1];
+    const settingsIconRef = useRef(null);
 
     return (
         <>
             <SearchBar
+                searchOpen={searchOpen}
                 setSelectedMenu={setSelectedMenu}
-                searchbarRef={searchbarRef}
+                setSearchOPen={setSearchOPen}
+                searchIconref={searchIconref}
             />
+
             <Notification
-                notificationRef={notificationRef}
+                notiOpen={notiOpen}
+                setNotiOpen={setNotiOpen}
+                notificationIconRef={notificationIconRef}
                 setSelectedMenu={setSelectedMenu}
             />
-            {SHOW_PANEL === "CREATE_POST_MODAL" && <CreatePost setSelectedMenu={setSelectedMenu} />}
-            {SHOW_PANEL === "SHOW_SETTINGS" && <Settings />}
+
+            {openPostModal && (
+                <CreatePost
+                    setSelectedMenu={setSelectedMenu}
+                    setOpenPostModal={setOpenPostModal}
+                />
+            )}
+            {openSettings && (
+                <Settings
+                    setOpenSettings={setOpenSettings}
+                    settingsIconRef={settingsIconRef}
+                />
+            )}
 
             <div
                 style={MenuAnimation}
@@ -180,13 +194,14 @@ export const Menu = () => {
                     </div>
                 </div>
                 <div
+                    ref={settingsIconRef}
                     onClick={() => {
                         handleMenus("Settings");
                     }}
                     className=" overflow-hidden flex items-center gap-[15px] cursor-pointer min-w-[150px]"
                 >
-                    {SHOW_PANEL === "SHOW_SETTINGS" ? <HamburgerBlack /> : <Hamburger />}
-                    <h3 className={`${SHOW_PANEL === "SHOW_SETTINGS" && "font-bold"}`}>More</h3>
+                    {openSettings ? <HamburgerBlack /> : <Hamburger />}
+                    <h3 className={`${openSettings && "font-bold"}`}>More</h3>
                 </div>
             </div>
         </>

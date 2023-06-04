@@ -3,17 +3,17 @@ import React from "react";
 import { ReactComponent as AddPost } from "../../assets/icons/add-posts/add-post.svg";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";
 import ModalWrapper from "../reusable-components/ModalWrapper";
-import { useDispatch } from "react-redux";
-import { showPanel } from "../../redux/modalSlice";
+// import { useDispatch } from "react-redux";
+// import { showPanel } from "../../redux/modalSlice";
 
-export const CreatePost = ({ setSelectedMenu }) => {
+export const CreatePost = ({ setSelectedMenu, setOpenPostModal }) => {
     const handlePostUpload = () => {};
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const hideModal = () => {
         setSelectedMenu("Home");
-        dispatch(showPanel(""));
+        setOpenPostModal(false);
     };
 
     return (

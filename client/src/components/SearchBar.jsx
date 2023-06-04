@@ -3,15 +3,12 @@ import React, { useRef } from "react";
 import { SearchHistory } from "./SearchHistory";
 import useOutsideClick from "../hooks/useOutsideClick";
 
-export const SearchBar = ({ setSearchOPen, searchOpen, searchIconref, setSelectedMenu }) => {
+export const SearchBar = ({ setSearchOPen, searchOpen, searchIconref }) => {
     const searchbarRef = useRef(null);
 
-    useOutsideClick(searchbarRef, searchIconref, () => callback());
-
-    const callback = () => {
-        setSelectedMenu("Home");
+    useOutsideClick(searchbarRef, searchIconref, () => {
         setSearchOPen(false);
-    };
+    });
 
     return (
         <div

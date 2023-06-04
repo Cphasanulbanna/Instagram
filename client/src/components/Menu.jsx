@@ -27,49 +27,47 @@ import { Settings } from "./modals/Settings";
 
 export const Menu = () => {
     //states
-    const [selectedMenu, setSelectedMenu] = useState("Home");
+    const [selectedMenu, setSelectedMenu] = useState("");
     const [notiOpen, setNotiOpen] = useState(false);
     const [searchOpen, setSearchOPen] = useState(false);
     const [openPostModal, setOpenPostModal] = useState(false);
     const [openSettings, setOpenSettings] = useState(false);
 
-    // console.log(searchOpen, "///");
     const tabs = [
-        { id: 1, path: "/", menu: "Home", icon: <Home />, blackIcon: <HomeBlack />, type: "link" },
-        { id: 2, menu: "Search", icon: <Search />, class: "search", type: "modal" },
+        { id: 1, path: "/", menu: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
+        { id: 2, menu: "Search", icon: <Search />, class: "search" },
         {
             id: 3,
             path: "/",
             menu: "Explore",
             icon: <Explore />,
             blackIcon: <ExploreBlack />,
-            type: "link",
         },
-        { id: 4, path: "/reels", menu: "Reels", icon: <Reel />, type: "link" },
+        { id: 4, path: "/reels", menu: "Reels", icon: <Reel /> },
         {
             id: 5,
             path: "/",
             menu: "Messages",
             icon: <Message />,
             blackIcon: <MessageBlack />,
-            type: "link",
         },
         {
             id: 6,
             menu: "Notifications",
             icon: <Heart />,
             blackIcon: <HeartBlack />,
-            class: "notification",
-            type: "modal",
         },
-        { id: 7, path: "/", menu: "Create", icon: <Add />, blackIcon: <AddBlack />, type: "link" },
+        { id: 7, path: "/", menu: "Create", icon: <Add />, blackIcon: <AddBlack /> },
     ];
+
+    const [s, setS] = useState("");
 
     const navigate = useNavigate();
     const handleMenus = (menu, route) => {
         setSelectedMenu((prev) =>
-            prev !== menu ? menu : route !== "/reels" ? "Home" : route === "" ? "Home" : ""
+            prev !== menu ? menu : route === "/reels" ? "Reels" : route === "/" ? "Home" : "Home"
         );
+        setS(menu);
         route && navigate(route);
         setSearchOPen((prev) => menu === "Search" && !prev);
         setNotiOpen((prev) => menu === "Notifications" && !prev);
@@ -77,19 +75,15 @@ export const Menu = () => {
         setOpenSettings((prev) => menu === "Settings" && !prev);
     };
 
-    console.log(selectedMenu, "***");
+    useEffect(() => {
+        if (searchOpen || notiOpen || openSettings || openPostModal) {
+            return setSelectedMenu((prev) => prev);
+        } else {
+            return setSelectedMenu("Home");
+        }
+    }, [searchOpen, notiOpen, openSettings, openPostModal]);
 
-    // useEffect(() => {
-    //     if (
-    //         openPostModal === false ||
-    //         openSettings === false ||
-    //         searchOpen === false ||
-    //         notiOpen === false
-    //     ) {
-    //         return setSelectedMenu("Home");
-    //     }
-    //     // return setSelectedMenu("Home");
-    // }, [openPostModal, openPostModal, searchOpen, notiOpen]);
+    console.log(selectedMenu);
 
     //resusable class
     const flex = "flex items-center justify-between";
@@ -112,7 +106,6 @@ export const Menu = () => {
             : { transition: transition, opacity: 1 };
 
     const tabRefs = tabs.map(() => useRef(null));
-
     const notificationIconRef = tabRefs[5];
     const searchIconref = tabRefs[1];
     const settingsIconRef = useRef(null);
@@ -178,6 +171,7 @@ export const Menu = () => {
                                     className={`${flex} gap-[15px] cursor-pointer ${item?.class}`}
                                     onClick={() => {
                                         handleMenus(item.menu, item?.path);
+                                        setS(item.menu);
                                     }}
                                 >
                                     <div className={`w-[24px] ${selectedMenu}`}>

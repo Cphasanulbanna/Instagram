@@ -5,13 +5,11 @@ import ThisMonth from "./ThisMonth";
 import Earlier from "./Earlier";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
-export const Notification = ({ setNotiOpen, notiOpen, notificationIconRef, setSelectedMenu }) => {
+export const Notification = ({ setNotiOpen, notiOpen, notificationIconRef }) => {
     const notificanbarRef = useRef(null);
-    useOutsideClick(notificanbarRef, notificationIconRef, () => setNotiOpen(false));
-
-    const clb = () => {
+    useOutsideClick(notificanbarRef, notificationIconRef, () => {
         setNotiOpen(false);
-    };
+    });
 
     return (
         <div

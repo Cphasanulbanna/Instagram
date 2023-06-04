@@ -59,18 +59,17 @@ export const Menu = () => {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (SHOW_PANEL === "" && location.pathname === "/") {
+            setSelectedMenu("Home");
+        }
+        if (SHOW_PANEL === "" && location.pathname === "/reels") {
+            setSelectedMenu("Reels");
+        }
+    }, [SHOW_PANEL]);
+
     const handleMenus = (MENU, ROUTE) => {
-        setSelectedMenu((prev) =>
-            prev !== MENU
-                ? MENU
-                : ROUTE === "/reels"
-                ? "Reels"
-                : ROUTE === "/" && SHOW_PANEL === ""
-                ? "Home"
-                : ROUTE !== "/reels"
-                ? "Home"
-                : prev
-        );
+        setSelectedMenu((prev) => (prev !== MENU ? MENU : ROUTE !== "/reels" ? "Home" : ""));
         ROUTE && navigate(ROUTE);
         const menuActions = {
             Search: "SEARCH_BAR",

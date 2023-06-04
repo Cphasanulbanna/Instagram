@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import { ReactComponent as AddPost } from "../../assets/icons/add-posts/add-post.svg";
 import { PrimaryButton } from "../reusable-components/PrimaryButton";

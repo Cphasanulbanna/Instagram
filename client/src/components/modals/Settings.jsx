@@ -6,7 +6,7 @@ import { ReactComponent as Save } from "../../assets/icons/posts/save.svg";
 import { ReactComponent as Theme } from "../../assets/icons/settings/theme.svg";
 import { ReactComponent as Report } from "../../assets/icons/settings/report.svg";
 
-export const Settings = ({ setSelectedMenu }) => {
+export const Settings = () => {
     const data = [
         { id: 1, title: "Settings", icon: <SettingsIcon /> },
         { id: 2, title: "Your Activity", icon: <Activity /> },

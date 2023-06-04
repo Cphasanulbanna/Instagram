@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 
 //packages
 import { useSelector, useDispatch } from "react-redux";
@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import { Notification } from "./notifications/Notification";
 import { CreatePost } from "./modals/CreatePost";
 import { Settings } from "./modals/Settings";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 export const Menu = () => {
     //states
@@ -40,7 +41,7 @@ export const Menu = () => {
 
     const tabs = [
         { id: 1, path: "/", menu: "Home", icon: <Home />, blackIcon: <HomeBlack /> },
-        { id: 2, menu: "Search", icon: <Search /> },
+        { id: 2, menu: "Search", icon: <Search />, class: "search" },
         { id: 3, path: "/", menu: "Explore", icon: <Explore />, blackIcon: <ExploreBlack /> },
         { id: 4, path: "/reels", menu: "Reels", icon: <Reel /> },
         { id: 5, path: "/", menu: "Messages", icon: <Message />, blackIcon: <MessageBlack /> },
@@ -58,7 +59,9 @@ export const Menu = () => {
                 ? "Reels"
                 : ROUTE === "/" && SHOW_PANEL === ""
                 ? MENU
-                : "Home"
+                : ROUTE !== "/reels"
+                ? "Home"
+                : prev
         );
         ROUTE && navigate(ROUTE);
         const menuActions = {
@@ -74,7 +77,7 @@ export const Menu = () => {
             dispatch(showPanel(""));
         }
     };
-
+    console.log(SHOW_PANEL, "PANEL");
     //resusable class
     const flex = "flex items-center justify-between";
     const transition = "all 0.5s ease-in-out";
@@ -95,11 +98,18 @@ export const Menu = () => {
             ? { transition: transition, opacity: 0 }
             : { transition: transition, opacity: 1 };
 
-    const swithcIcons = () => {};
+    const [clickedItemRef, setClickedItemRef] = useState(null);
+
     return (
         <>
-            <SearchBar />
-            <Notification />
+            <SearchBar
+                clickedItemRef={clickedItemRef}
+                setSelectedMenu={setSelectedMenu}
+            />
+            <Notification
+                clickedItemRef={clickedItemRef}
+                setSelectedMenu={setSelectedMenu}
+            />
             {SHOW_PANEL === "CREATE_POST_MODAL" && <CreatePost setSelectedMenu={setSelectedMenu} />}
             {SHOW_PANEL === "SHOW_SETTINGS" && <Settings />}
 
@@ -121,30 +131,35 @@ export const Menu = () => {
                             />
                             <InstagramSmall
                                 style={LogoAnimation2}
-                                className={`absolute z-50 left-[0px] top-[0px] scale-0 cursor-pointer w-[24px] h-[24px]`}
+                                className={`absolute z-50 left-[0px] top-[0px] scale-0 cursor-pointer w-[24px] h-[24px] lg1:hidden`}
                             />
                             <InstagramSmall className={` w-[24px] h-[24px] hidden lg4:block`} />
                         </div>
                     </div>
                     <div className={`flex flex-col gap-[40px] items-start`}>
-                        {tabs.map((item) => (
-                            <div
-                                key={item.id}
-                                className={`${flex} gap-[15px] cursor-pointer`}
-                                onClick={() => {
-                                    handleMenus(item.menu, item?.path);
-                                }}
-                            >
-                                <div className={`w-[24px] ${selectedMenu}`}>
-                                    {selectedMenu === item.menu && item?.blackIcon
-                                        ? item.blackIcon
-                                        : item.icon}
+                        {tabs.map((item) => {
+                            const itemRef = createRef(null);
+                            return (
+                                <div
+                                    ref={itemRef}
+                                    key={item.id}
+                                    className={`${flex} gap-[15px] cursor-pointer ${item?.class}`}
+                                    onClick={() => {
+                                        setClickedItemRef(itemRef.current);
+                                        handleMenus(item.menu, item?.path);
+                                    }}
+                                >
+                                    <div className={`w-[24px] ${selectedMenu}`}>
+                                        {selectedMenu === item.menu && item?.blackIcon
+                                            ? item.blackIcon
+                                            : item.icon}
+                                    </div>
+                                    <h3 className={selectedMenu === item.menu ? "font-bold" : ""}>
+                                        {item.menu}
+                                    </h3>
                                 </div>
-                                <h3 className={selectedMenu === item.menu ? "font-bold" : ""}>
-                                    {item.menu}
-                                </h3>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
                 <div

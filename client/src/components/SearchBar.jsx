@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SearchHistory } from "./SearchHistory";
+import useOutsideClick from "../hooks/useOutsideClick";
+import { showPanel } from "../redux/modalSlice";
+import OutsideClickHandler from "react-outside-click-handler";
+import { useLocation } from "react-router-dom";
 
-export const SearchBar = () => {
+export const SearchBar = ({ clickedItemRef, setSelectedMenu }) => {
     const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
+
+    const dispatch = useDispatch();
+    const searchbarRef = useRef(null);
+    useOutsideClick(searchbarRef, () => SHOW_PANEL === "SEARCH_BAR" && handle(), clickedItemRef);
+
+    const location = useLocation();
+
+    const handle = () => {
+        dispatch(showPanel(""));
+        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "Home");
+    };
 
     return (
         <div
+            ref={searchbarRef}
             style={
                 SHOW_PANEL === "SEARCH_BAR"
                     ? { left: "70px", transition: "all 0.5s ease-in-out", opacity: "1" }

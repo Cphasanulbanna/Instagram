@@ -1,16 +1,23 @@
 import { useEffect } from "react";
-const useOutsideClick = (ref, callback) => {
-    const handleClick = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
-            callback();
-        }
-    };
+
+export default function useOutsideClick(ref, handler, excludeRef) {
     useEffect(() => {
-        const handleMouseDown = (event) => handleClick(event);
-        document.addEventListener("mousedown", handleMouseDown);
-        return () => {
-            document.removeEventListener("mousedown", handleMouseDown);
+        const listener = (event) => {
+            // Do nothing if clicking ref's element or descendent elements
+            if (
+                !ref.current ||
+                ref.current.contains(event.target) ||
+                (excludeRef && excludeRef.contains(event.target))
+            ) {
+                return;
+            }
+            handler(event);
         };
-    }, [ref, callback]);
-};
-export default useOutsideClick;
+        document.addEventListener("mousedown", listener);
+        document.addEventListener("touchstart", listener);
+        return () => {
+            document.removeEventListener("mousedown", listener);
+            document.removeEventListener("touchstart", listener);
+        };
+    }, [ref, handler]);
+}

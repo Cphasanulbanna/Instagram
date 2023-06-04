@@ -5,24 +5,27 @@ import ThisWeek from "./ThisWeek";
 import ThisMonth from "./ThisMonth";
 import Earlier from "./Earlier";
 import { showPanel } from "../../redux/modalSlice";
-import useOutsideClick from "../../hooks/useOutsideClick";
+// import useOutsideClick from "../../hooks/useOutsideClick";
 import { useLocation } from "react-router-dom";
 
-export const Notification = ({ clickedItemRef, setSelectedMenu }) => {
+export const Notification = ({ notificationRef, clickedItemRef, setSelectedMenu }) => {
     const SHOW_PANEL = useSelector((state) => state.modal.showPanel);
     const dispatch = useDispatch();
     const notificanbarRef = useRef(null);
 
-    useOutsideClick(notificanbarRef, () => handle(), clickedItemRef);
+    // useOutsideClick(notificanbarRef, () => handle(), clickedItemRef);
     const location = useLocation();
 
     const handle = () => {
-        setSelectedMenu(location.pathname === "/reels" ? "Reels" : "");
-        dispatch(showPanel(""));
+        // dispatch(showPanel(""));
+        // setSelectedMenu(
+        //     location.pathname === "/reels" ? "Reels" : location.pathname === "/" ? "Home" : ""
+        // );
     };
     return (
         <div
-            ref={notificanbarRef}
+            id="noti"
+            ref={notificationRef}
             style={
                 SHOW_PANEL === "NOTIFICATION_BAR"
                     ? { left: "70px", transition: "all 0.5s ease-in-out", opacity: "1" }

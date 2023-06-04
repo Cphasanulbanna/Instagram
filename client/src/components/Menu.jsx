@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 
 //packages
 import { useSelector, useDispatch } from "react-redux";
@@ -29,6 +29,9 @@ import { useNavigate } from "react-router-dom";
 import { Notification } from "./notifications/Notification";
 import { CreatePost } from "./modals/CreatePost";
 import { Settings } from "./modals/Settings";
+import { useOutsideClick } from "../hooks/useOutsideClick";
+import { useClickAway } from "ahooks";
+// import useOutsideClick from "../hooks/useOutsideClick";
 
 export const Menu = () => {
     //states
@@ -63,7 +66,7 @@ export const Menu = () => {
                 : ROUTE === "/reels"
                 ? "Reels"
                 : ROUTE === "/" && SHOW_PANEL === ""
-                ? MENU
+                ? "Home"
                 : ROUTE !== "/reels"
                 ? "Home"
                 : prev
@@ -82,7 +85,6 @@ export const Menu = () => {
             dispatch(showPanel(""));
         }
     };
-    console.log(SHOW_PANEL, "PANEL");
     //resusable class
     const flex = "flex items-center justify-between";
     const transition = "all 0.5s ease-in-out";
@@ -90,7 +92,7 @@ export const Menu = () => {
     //animations
     const MenuAnimation =
         SHOW_PANEL === "SEARCH_BAR" || SHOW_PANEL === "NOTIFICATION_BAR"
-            ? { maxWidth: "70px", transition: transition }
+            ? { maxWidth: "70px", transition: transition, transitionDelay: "unset" }
             : { transition: transition, transitionDelay: "0.2s" };
 
     const LogoAnimation2 =
@@ -103,16 +105,29 @@ export const Menu = () => {
             ? { transition: transition, opacity: 0 }
             : { transition: transition, opacity: 1 };
 
-    const [clickedItemRef, setClickedItemRef] = useState(null);
+    const tabRefs = tabs.map(() => useRef(null));
+
+    // useOutsideClick(notificationRef, notificationIconRef);
+
+    const notificationIconRef = tabRefs[5];
+    const notificationRef = useRef(null);
+
+    const searchIconRef = tabRefs[1];
+    const searchbarRef = useRef(null);
+
+    useOutsideClick(searchbarRef);
+    useOutsideClick(notificationRef);
+
+    console.log(SHOW_PANEL, "***");
 
     return (
         <>
             <SearchBar
-                clickedItemRef={clickedItemRef}
                 setSelectedMenu={setSelectedMenu}
+                searchbarRef={searchbarRef}
             />
             <Notification
-                clickedItemRef={clickedItemRef}
+                notificationRef={notificationRef}
                 setSelectedMenu={setSelectedMenu}
             />
             {SHOW_PANEL === "CREATE_POST_MODAL" && <CreatePost setSelectedMenu={setSelectedMenu} />}
@@ -142,15 +157,13 @@ export const Menu = () => {
                         </div>
                     </div>
                     <div className={`flex flex-col gap-[40px] items-start`}>
-                        {tabs.map((item) => {
-                            const itemRef = createRef(null);
+                        {tabs.map((item, index) => {
                             return (
                                 <div
-                                    ref={itemRef}
+                                    ref={tabRefs[index]}
                                     key={item.id}
                                     className={`${flex} gap-[15px] cursor-pointer ${item?.class}`}
                                     onClick={() => {
-                                        setClickedItemRef(itemRef.current);
                                         handleMenus(item.menu, item?.path);
                                     }}
                                 >

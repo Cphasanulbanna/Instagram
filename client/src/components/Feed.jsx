@@ -14,8 +14,11 @@ const Feed = () => {
 
     return (
         <div className="lg1:w-[70%] lg1:mx-auto flex flex-col gap-[25px]">
-            {medias.map((media) => (
-                <Post media={media} />
+            {medias.map((media, index) => (
+                <Post
+                    key={index}
+                    media={media}
+                />
             ))}
         </div>
     );
